@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grd Demo</title>
+
+  <link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/last-icon@1/last-icon.js">
+  <script type="module" src="https://cdn.jsdelivr.net/npm/last-icon@1/last-icon.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/last-icon@1/last-icon.css">
+  </link>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mvp.css@1.7.4/mvp.css" />
+  <link rel="stylesheet" href="grd.css" />
+  <style>
+    .demo:not(.no-resize) {
+      overflow: auto;
+      resize: horizontal;
+    }
+
+    .demo {
+      border: 1px solid rgba(255, 0, 255, 0.25);
+      padding: 1.5rem;
+      max-width: calc(100% - 3rem);
+      position: relative;
+    }
+
+    .demo-half {
+      width: 50%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background-color: rgba(255, 0, 255, 0.05);
+    }
+
+    .demo .grd>* {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      background-color: rgba(255, 0, 255, 0.1);
+      border: 1px solid rgba(255, 0, 255, 0.25);
+      text-align: center;
+    }
+
+    .demo .grd>*>* {
+      padding-top: .75rem;
+      padding-bottom: .75rem;
+      background-color: rgba(255, 0, 255, 0.1);
+      border: 1px solid rgba(255, 0, 255, 0.25);
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Grd</h1>
+    <p><em>A powerful css grid system</em></p>
+  </header>
+  <main>
+    <p>Credits to <a href="https://getbootstrap.com/docs/5.1/layout/css-grid/" target="_blank">Bootstrap 5 CSS Grids</a> for inspiration. This work is mostly based on theirs.</p>
+    <h2>12 columns</h2>
+    <p>Its the classic 12 columns. Use the base <code>grd</code> class.</p>
+    <div class="demo no-resize">
+      <div class="grd">
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+      </div>
+    </div>
+    <h2>Auto columns</h2>
+    <p>
+      Use <code>grd-auto</code> for smart columns.
+    </p>
+    <div class="demo">
+      <div class="grd grd-auto">
+        <div>col 1<br />bigger<br />faster<br />stronger</div>
+        <div>col 2</div>
+        <div>col 3</div>
+      </div>
+    </div>
+    <h2>Responsive</h2>
+    <p>
+      Use <code>col</code> or <code>md, lg, xl, xxl</code> attributes for setting columns.
+    </p>
+    <div class="demo no-resize">
+      <div class="grd">
+        <div col="6" md="3">col="6" md="3"</div>
+        <div col="6" md="3">col="6" md="3"</div>
+        <div col="6" md="3">col="6" md="3"</div>
+        <div col="6" md="3">col="6" md="3"</div>
+      </div>
+    </div>
+    <h2>Start</h2>
+    <p>
+      Use <code>start</code> or <code>start-</code> to add an offset. <code>start=1</code> can be used to force a new row.<br />
+      <code>start=7</code> starts in the middle, since it's 1 based.
+      <br />
+      If that's too much classes for you, you can disable their generation by setting <code>$grd-start: false</code>.
+    </p>
+    <div class="demo no-resize">
+      <div class="demo-half"></div>
+      <div class="grd">
+        <div col="3" start="1" start-md="3">start="1" start-md="3"</div>
+        <div col="4" start="7" start-lg="9">col="4" start="7" start-lg="9"</div>
+        <div col="2" start="1">col="2" start="1"</div>
+      </div>
+    </div>
+    <h2>Mixing columns</h2>
+    <div class="demo no-resize">
+      <div class="grd">
+        <div col="6">col="6"</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+        <div>1</div>
+      </div>
+    </div>
+    <h2>Multiple grids</h2>
+    <p>Grids have space based on default gutter between them by default.</p>
+    <div class="demo no-resize">
+      <div class="grd grd-auto">
+        <div class="">col1</div>
+        <div class="">col2</div>
+        <div class="">col3</div>
+      </div>
+      <div class="grd grd-auto">
+        <div class="">col1</div>
+        <div class="">col2</div>
+      </div>
+    </div>
+    <h2>Gaps</h2>
+    <p>Use <code>gap=0</code> or set any custom <code>--gap</code>.</p>
+    <div class="demo no-resize">
+      <div class="grd" gap="0">
+        <div col="6">col="6"</div>
+        <div col="6">col="6"</div>
+        <div col="6">col="6"</div>
+        <div col="6">col="6"</div>
+      </div>
+      <div class="grd" gap="0">
+        <div col="6">col="6"</div>
+        <div col="6">col="6"</div>
+      </div>
+      <div class="grd" style="--gap: 0.5rem 1rem; margin-top: 0.5rem">
+        <div col="6">col="6"</div>
+        <div col="6">col="6"</div>
+      </div>
+    </div>
+    <h2>Changing number of columns or rows</h2>
+    <div class="demo no-resize">
+      <div class="grd" style="--columns:3; --rows:3">
+        <div>Auto-column</div>
+        <div start="2" style="grid-row: 2">Auto-column</div>
+        <div start="3" style="grid-row: 3">Auto-column</div>
+      </div>
+      <div class="grd" style="--columns: 18; --gap: .5rem;">
+        <div style="--col:14">col 14 columns</div>
+        <div style="--col:4">col 4 columns</div>
+      </div>
+    </div>
+    <h2>Prebuilt smart grids</h2>
+    <p>Use <code>grd-2, grd-3 or grd-4</code> for smart responsive grids. They fully collapse on the smallest breakpoint.
+      <br />
+      If that's too much classes for you, you can disable their generation by setting <code>$grd-smart-grids: false</code>.
+    </p>
+    <div class="demo no-resize">
+      <div class="grd grd-4">
+        <div>Auto-column 4</div>
+        <div>Auto-column 4</div>
+        <div>Auto-column 4</div>
+        <div>Auto-column 4</div>
+      </div>
+      <div class="grd grd-3">
+        <div>Auto-column 3</div>
+        <div>Auto-column 3</div>
+        <div>Auto-column 3</div>
+      </div>
+    </div>
+    <h2>Alignment</h2>
+    <p>Use <code>align-items: start|center|end</code> and <code>justify-items: start|center|end</code>.</p>
+    <div class="demo no-resize">
+      <div class="grd grd-auto" style="align-items: end;">
+        <div style="height:100px;">
+        </div>
+        <div style="height:200px;">
+        </div>
+      </div>
+      <div class="grd grd-auto" style="justify-items: end;">
+        <div style="width:100px;">
+        </div>
+        <div style="width:200px;">
+        </div>
+      </div>
+    </div>
+    <h2>Order</h2>
+    <p>Cells have a default order of 6. You can easily take advantage of that to reorder your columns.</p>
+    <div class="demo no-resize">
+      <div class="grd grd-auto">
+        <div>col 1</div>
+        <div style="order:1">col 2</div>
+        <div>col 3</div>
+      </div>
+      <div class="grd grd-auto">
+        <div style="order:12">col 1</div>
+        <div>col 2</div>
+        <div>col 3</div>
+      </div>
+    </div>
+  </main>
+  <footer>
+    <hr />
+    Made with <l-i name="heart" set="em"></l-i> in <l-i name="be" set="fl"></l-i> by <a href="https://www.lekoala.be">LeKoala</a>
+  </footer>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+$grd-gap: 1.5rem !default;
+$grd-columns: 12 !default;
+$grd-breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px,
+) !default;
+$grd-start: true !default;
+$grd-smart-grids: true !default;
+.grd {
+  --min: 15ch;
+  --gap: #{$grd-gap};
+  --columns: #{$grd-columns};
+  --rows: 1;
+
+  display: grid;
+  grid-gap: var(--gap);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  grid-template-columns: repeat(var(--columns), 1fr);
+
+  & + .grd {
+    margin-top: #{$grd-gap};
+  }
+
+  &-auto {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--min)), 1fr));
+    grid-auto-rows: minmax(min-content, max-content);
+  }
+
+  &[gap="0"] {
+    margin-top: 0;
+    --gap: 0;
+  }
+
+  > * {
+    order: 6;
+    grid-column: auto/span var(--col);
+  }
+
+  @if $grd-smart-grids {
+    // Prebuilt grids up to 4
+    &-2,
+    &-3,
+    &-4 {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    @media (min-width: map-get($grd-breakpoints, "sm")) {
+      &-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      &-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      &-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    // Only display 4 starting from lg
+    @media (min-width: map-get($grd-breakpoints, "lg")) {
+      &-4 {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  }
+
+  @if $grd-start {
+    [start] {
+      grid-column-start: var(--start);
+    }
+  }
+
+  @for $counter from 1 through $grd-columns {
+    [col="#{$counter}"] {
+      --col: #{$counter};
+    }
+    @if $grd-start {
+      [start="#{$counter}"] {
+        --start: #{$counter};
+      }
+    }
+  }
+
+  @each $name, $value in $grd-breakpoints {
+    @media (min-width: $value) {
+      [#{$name}] {
+        grid-column: auto/span var(--#{$name});
+      }
+      @if $grd-start {
+        [start-#{$name}] {
+          grid-column-start: var(--start-#{$name});
+        }
+      }
+      @for $counter from 1 through $grd-columns {
+        [#{$name}="#{$counter}"] {
+          --#{$name}: #{$counter};
+        }
+        @if $grd-start {
+          [start-#{$name}="#{$counter}"] {
+            --start-#{$name}: #{$counter};
+          }
+        }
+      }
+    }
+  }
+}

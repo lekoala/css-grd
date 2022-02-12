@@ -1,0 +1,24 @@
+{
+  "name": "css-grd",
+  "version": "1.0.0",
+  "description": "Standalone CSS Grid framework built with SCSS",
+  "main": "grd.scss",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "http-server",
+    "compile-css": "sass grd.scss:grd.min.css --style compressed",
+    "watch-css": "npm run compile-css -- --watch --poll",
+    "bump": "npm run compile-css && npm version patch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lekoala/grd"
+  },
+  "keywords": [
+    "css",
+    "grid",
+    "framework"
+  ],
+  "author": "LeKoala",
+  "license": "MIT"
+}
